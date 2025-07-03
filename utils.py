@@ -1,7 +1,15 @@
+# 📁 utils.py
 from keybert import KeyBERT
 import spacy
+import subprocess
 
-nlp = spacy.load("en_core_web_sm")
+# ✅ Download model if not available
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
+    nlp = spacy.load("en_core_web_sm")
+
 kw_model = KeyBERT()
 
 def extract_keywords(text, top_n=5):
