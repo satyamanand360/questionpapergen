@@ -1,13 +1,13 @@
-# 📁 utils.py
+# utils.py
 from keybert import KeyBERT
 import spacy
 import subprocess
 
-# ✅ Download model if not available
+# Safe auto-download of model
 try:
     nlp = spacy.load("en_core_web_sm")
 except OSError:
-    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
+    subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"], check=True)
     nlp = spacy.load("en_core_web_sm")
 
 kw_model = KeyBERT()
